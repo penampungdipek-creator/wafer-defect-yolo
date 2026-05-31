@@ -1,0 +1,44 @@
+# Training hyperparameters for wafer defect detection
+model:
+  architecture: "yolov8l"
+  pretrained: "yolov8l.pt"
+  num_classes: 10
+  img_size: 640
+
+training:
+  epochs: 300
+  batch_size: 16
+  optimizer: "AdamW"
+  lr0: 0.001
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 5
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+
+augmentation:
+  mosaic: 1.0
+  mixup: 0.15
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  degrees: 10.0
+  translate: 0.1
+  scale: 0.5
+  shear: 2.0
+  flipud: 0.5
+  fliplr: 0.5
+
+data:
+  train: "data/train"
+  val: "data/val"
+  test: "data/test"
+  names: ["scratch", "particle", "edge_chip", "void", "pattern_shift",
+          "bridge", "missing_bond", "crack", "contamination", "delamination"]
+
+logging:
+  project: "wafer-defect-yolo"
+  name: "yolov8l_lsknet"
+  use_wandb: true
+  use_mlflow: false

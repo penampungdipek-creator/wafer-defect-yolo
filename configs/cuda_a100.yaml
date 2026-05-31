@@ -1,0 +1,13 @@
+# CUDA configuration for NVIDIA A100 (baseline comparison)
+device: "cuda:0"
+
+model:
+  weights: "weights/wafer_yolov8l.pt"
+  img_size: 640
+  conf_threshold: 0.25
+  iou_threshold: 0.45
+
+benchmark:
+  batch_sizes: [1, 8, 16, 32]
+  warmup_iterations: 20
+  test_iterations: 200

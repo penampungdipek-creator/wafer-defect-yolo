@@ -1,0 +1,22 @@
+# ROCm configuration for AMD RX 7900 XTX (RDNA3)
+device: "rocm:0"
+gpu_arch: "gfx1100"
+
+environment:
+  HSA_OVERRIDE_GFX_VERSION: "11.0.0"
+  HSA_ENABLE_SDMA: "0"
+  PYTORCH_HIP_ALLOC_CONF: "garbage_collection_threshold:0.8,max_split_size_mb:512"
+  HIP_VISIBLE_DEVICES: "0"
+  ROCR_VISIBLE_DEVICES: "0"
+  GPU_MAX_HW_QUEUES: "8"
+
+model:
+  weights: "weights/wafer_yolov8l.pt"
+  img_size: 640
+  conf_threshold: 0.25
+  iou_threshold: 0.45
+
+benchmark:
+  batch_sizes: [1, 4, 8]
+  warmup_iterations: 10
+  test_iterations: 100
